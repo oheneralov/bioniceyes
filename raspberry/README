@@ -1,0 +1,7 @@
+Sensory substitution
+This technology for the blind people offers to see with ears through image-to-sound renderings. Images are converted into sound. In theory this could result into synthetic vision with truly visual sensations ("qualia"), due to the neural plasticity of the human brain through training. 
+
+1 Camera captures an image.
+2 Thw edge of an image is detected
+3. The edge coordinates are found
+4. coordinates are voiced
