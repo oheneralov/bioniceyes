@@ -22,6 +22,8 @@ Drawbacks of using laplacian:- Convolving with Laplacian Kernel leads to a lot o
 from PIL import Image, ImageFilter
 from numpy import asarray
 from numpy import savetxt
+from pysinewave import SineWave
+import time
  
  
 # Opening the image (R prefixed to string
@@ -49,10 +51,25 @@ numpydata = asarray(image)
 # <class 'numpy.ndarray'>
 print(type(numpydata))
 
+sinewave = SineWave(pitch = 0, pitch_per_second = 6)
+
 # data
 #print(numpydata)
-#for row in numpydata:
-#    print(row)
+volume = 40
+sinewave.play()
+
+for row in numpydata:
+    #volume = volume - 1
+    # 1 volume decrease per row
+    # the lower row the smaller volume
+    sinewave.set_volume(volume)
+    for value in row:
+        # pitch depends on brightness
+        sinewave.set_pitch(value)
+        time.sleep(0.02)
+
+sinewave.stop()
+
 
 #  shape
 print(numpydata.shape)
@@ -61,7 +78,31 @@ print(numpydata.shape)
 #                                          -1, -1, -1, -1), 1, 0))
  
 # Saving the Image Under the name Edge_Sample.png
-image.save(r"Edge_Sample.png")
+#image.save(r"Edge_Sample.png")
+image.close()
 
-savetxt('test.out', numpydata, delimiter=' ', fmt='%3d', newline='\n\n')
+#savetxt('test.out', numpydata, delimiter=' ', fmt='%3d', newline='\n\n')
+
+
+# voice image
+"""
+https://pypi.org/project/pysinewave/
+You may want to directly modify the frequency and amplitude of a SineWave. We do provide two alternative functions, SineWave.set_frequency(hertz) and SineWave.set_amplitude(percent), however we suggest that you use SineWave.set_pitch(pitch) and SineWave.set_volume(decibels) instead.
+
+Why? The brain naturally perceives ratios between sound's frequency and amplitude much better than differences. This means that working directly with frequency will cause high frequencies to be much harder to distinguish than low frequencies. Similarly for amplitude.
+
+The conversion between pitch and frequency (in Hz) is: frequency = 440 * 2^((pitch-9)/2). For instance, note that a pitch of 0 is middle C, i.e. a frequency of 261.63 Hz.
+
+The conversion between volume (in decibels) and amplitude is: amplitude = 2^(volume/10). For instance, increasing the volume by 10 decibels doubles the amplitude of the sine wave.
+
+Here's a helpful table showing the relationship between frequency, pitch, and musical notes for one octave:
+
+Pitch 	0 	1 	2 	3 	4 	5 	6 	7 	8 	9 	10 	11 	12
+Frequency 	261.63 	277.18 	293.66 	311.13 	329.63 	349.23 	369.99 	392.00 	415.30 	440.00 	466.16 	493.88 	523.25
+Note 	C 	C#/Db 	D 	D#/Eb 	E 	F 	F#/Gb 	G 	G#/Ab 	A 	A#/Bb 	B 	C
+"""
+
+
+
+
 
