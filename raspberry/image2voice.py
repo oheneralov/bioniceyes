@@ -56,23 +56,37 @@ sinewave = SineWave(pitch = 0, pitch_per_second = 6)
 # data
 #print(numpydata)
 volume = 40
-sinewave.play()
+brightness_threshold = 50
+counter = 0
+pitchesArr = []
+
+#volume = volume - 1
+# 1 volume decrease per row
+# the lower row the smaller volume
+sinewave.set_volume(volume)
+
 
 for row in numpydata:
-    #volume = volume - 1
-    # 1 volume decrease per row
-    # the lower row the smaller volume
-    sinewave.set_volume(volume)
+    pitchesArr.append(0) # denotes a new row 
     for value in row:
-        # pitch depends on brightness
-        sinewave.set_pitch(value)
-        time.sleep(0.02)
+        # pitch depends on x coordinate of n edge point
+        if value > brightness_threshold:
+            counter = counter + 1
+            pitchesArr.append(value)
+
+sinewave.play()
+for value in pitchesArr:
+    sinewave.set_pitch(value)
+    time.sleep(0.01)
 
 sinewave.stop()
 
 
+
+
+
 #  shape
-print(numpydata.shape)
+print("counter ", counter)
 # Method 2: Calculating Edges using the passed laplacian Kernel
 # final = img.filter(ImageFilter.Kernel((3, 3), (-1, -1, -1, -1, 8,
 #                                          -1, -1, -1, -1), 1, 0))
