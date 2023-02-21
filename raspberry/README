@@ -7,3 +7,8 @@ This technology for the blind people offers to see with ears through image-to-so
 4. the matrix of coordinates are voiced (matrix consists of values 0...250 where 0 = dark and 250 = white)
 a. if brightnest > 10 it is voiced due to its coordinates (signal depends on the x coordinate in the row). X coordinate is described by a note a,b,c,d,e,d,f
 b. each row is described by a reserved signal
+
+Building for Android
+buildozer init
+buildozer -v android debug
+buildozer android deploy run logcat
