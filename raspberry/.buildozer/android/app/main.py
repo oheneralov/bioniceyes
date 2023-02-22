@@ -21,6 +21,9 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.utils import platform
 import time
+#from PIL import Image
+import numpy
+
 
 
 Builder.load_string('''
@@ -68,7 +71,13 @@ class CameraClick(BoxLayout):
         '''
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        camera.export_to_png("IMG_{}.png".format(timestr))
+        #camera.export_to_png("IMG_{}.png".format(timestr))
+        texture = self.cameraObject.texture
+        size=texture.size
+        pixels = texture.pixels
+        #pil_image=Image.frombytes(mode='RGBA', size=size,data=pixels)
+        #numpypicture= numpy.array(pil_image)
+        #numpypicture.shape
         
         print("Captured")
 
