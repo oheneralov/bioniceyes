@@ -1,3 +1,4 @@
 .buildozer
 .vscode
-raspberry/.buildozer
+raspberry/.buildozer/*
+raspberry/bin/
