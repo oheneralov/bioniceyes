@@ -1,69 +1,45 @@
-'''
-Camera Example
-==============
-
-This example demonstrates a simple use of the camera. It shows a window with
-a buttoned labelled 'play' to turn the camera on and off. Note that
-not finding a camera, perhaps because gstreamer is not installed, will
-throw an exception during the kv language processing.
-Please set camera perission to allow for this application
-amd camera state should be normal without delays
-
-'''
-
-# Uncomment these lines to see all the messages
-# from kivy.logger import Logger
-# import logging
-# Logger.setLevel(logging.TRACE)
-
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.utils import platform
+from android.permissions import request_permissions, Permission
 import time
-#from PIL import Image
-import numpy
 
-
+request_permissions([
+    Permission.CAMERA,
+    Permission.WRITE_EXTERNAL_STORAGE,
+    Permission.READ_EXTERNAL_STORAGE
+])
 
 Builder.load_string('''
 <CameraClick>:
     orientation: 'vertical'
     Camera:
+        index: 0
         id: camera
-        resolution: (640, 480)
-        play: False
-    ToggleButton:
-        text: 'Play'
-        on_press: camera.play = not camera.play
-        size_hint_y: None
-        height: '48dp'
+        resolution: (640,480)
+        play: True
+        allow_stretch: True
+        canvas.before:
+            PushMatrix
+            Rotate:
+                angle: -90
+                origin: self.center
+        canvas.after:
+            PopMatrix
     Button:
         text: 'Capture'
         size_hint_y: None
         height: '48dp'
         on_press: root.capture()
+    
 ''')
 
 
 class CameraClick(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self._request_android_permissions()
 
-
-    @staticmethod
-    def is_android():
-        return platform == 'android'
-
-    def _request_android_permissions(self):
-        """
-        Requests CAMERA permission on Android.
-        """
-        if not self.is_android():
-            return
-        from android.permissions import request_permission, Permission
-        request_permission(Permission.CAMERA)
     def capture(self):
         '''
         Function to capture the images and give them the names
@@ -71,14 +47,7 @@ class CameraClick(BoxLayout):
         '''
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        #camera.export_to_png("IMG_{}.png".format(timestr))
-        texture = self.cameraObject.texture
-        size=texture.size
-        pixels = texture.pixels
-        #pil_image=Image.frombytes(mode='RGBA', size=size,data=pixels)
-        #numpypicture= numpy.array(pil_image)
-        #numpypicture.shape
-        
+        camera.export_to_png("IMG_{}.png".format(timestr))
         print("Captured")
 
 
