@@ -2,14 +2,21 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.utils import platform
-from android.permissions import request_permissions, Permission
+from PIL import Image, ImageFilter
 import time
+import numpy
 
-request_permissions([
+
+if ( platform == 'android' ):
+    from android.permissions import request_permissions, Permission
+    request_permissions([
     Permission.CAMERA,
     Permission.WRITE_EXTERNAL_STORAGE,
     Permission.READ_EXTERNAL_STORAGE
 ])
+
+
+
 
 Builder.load_string('''
 <CameraClick>:
@@ -47,8 +54,12 @@ class CameraClick(BoxLayout):
         '''
         camera = self.ids['camera']
         timestr = time.strftime("%Y%m%d_%H%M%S")
-        camera.export_to_png("IMG_{}.png".format(timestr))
-        print("Captured")
+        #camera.export_to_png("IMG_{}.png".format(timestr))
+        texture = camera.texture
+        pixels = texture.pixels
+        print("pixels are ", type(pixels))
+        pil_image=Image.frombytes(mode='RGBA', size=size, data=pixels)
+        numpypicture=numpy.array(pil_image)
 
 
 class TestCamera(App):
