@@ -119,12 +119,5 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     Text("Hello World!!!")
-    outputDirectory = getOutputDirectory()
-    CameraView(
-        outputDirectory = outputDirectory,
-        executor = cameraExecutor,
-        onImageCaptured = ::handleImageCapture,
-        onError = { Log.e("kilo", "View error:", it) }
-    )
 }
 

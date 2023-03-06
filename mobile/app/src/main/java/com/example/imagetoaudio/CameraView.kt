@@ -1,12 +1,12 @@
 package com.example.imagetoaudio
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.ImageFormat
+import android.graphics.YuvImage
 import android.net.Uri
 import android.util.Log
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.border
@@ -117,7 +117,8 @@ private fun takePhoto(
     )
 
     val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-
+    // take photo
+    /*
     imageCapture.takePicture(outputOptions, executor, object: ImageCapture.OnImageSavedCallback {
         override fun onError(exception: ImageCaptureException) {
             Log.e("kilo", "Take photo error:", exception)
@@ -129,6 +130,42 @@ private fun takePhoto(
             onImageCaptured(savedUri)
         }
     })
+    */
+
+    class MyImage : ImageCapture.OnImageCapturedCallback() {
+        override fun onError(exception: ImageCaptureException) {
+            Log.e("kilo", "Take photo error:", exception)
+            onError(exception)
+        }
+
+        override fun onCaptureSuccess(image: ImageProxy) {
+            val imagPixels = image.planes
+
+
+        }
+    }
+
+
+    imageCapture.takePicture(executor, MyImage())
+}
+
+fun ImagetoBitmap(planes): Bitmap {
+    val yBuffer = planes[0].buffer // Y
+    val vuBuffer = planes[2].buffer // VU
+
+    val ySize = yBuffer.remaining()
+    val vuSize = vuBuffer.remaining()
+
+    val nv21 = ByteArray(ySize + vuSize)
+
+    yBuffer.get(nv21, 0, ySize)
+    vuBuffer.get(nv21, ySize, vuSize)
+
+    val yuvImage = YuvImage(nv21, ImageFormat.NV21, this.width, this.height, null)
+    val out = ByteArrayOutputStream()
+    yuvImage.compressToJpeg(Rect(0, 0, yuvImage.width, yuvImage.height), 50, out)
+    val imageBytes = out.toByteArray()
+    return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 }
 
 private suspend fun Context.getCameraProvider(): ProcessCameraProvider = suspendCoroutine { continuation ->
