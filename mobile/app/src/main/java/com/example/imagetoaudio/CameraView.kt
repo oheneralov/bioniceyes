@@ -2,6 +2,7 @@ package com.example.imagetoaudio
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageFormat
 import android.graphics.YuvImage
 import android.net.Uri
@@ -24,12 +25,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -140,6 +143,8 @@ private fun takePhoto(
 
         override fun onCaptureSuccess(image: ImageProxy) {
             val imagPixels = image.planes
+            Log.e("kilo", "Take photo success")
+
 
 
         }
@@ -149,6 +154,7 @@ private fun takePhoto(
     imageCapture.takePicture(executor, MyImage())
 }
 
+/*
 fun ImagetoBitmap(planes): Bitmap {
     val yBuffer = planes[0].buffer // Y
     val vuBuffer = planes[2].buffer // VU
@@ -167,6 +173,7 @@ fun ImagetoBitmap(planes): Bitmap {
     val imageBytes = out.toByteArray()
     return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 }
+*/
 
 private suspend fun Context.getCameraProvider(): ProcessCameraProvider = suspendCoroutine { continuation ->
     ProcessCameraProvider.getInstance(this).also { cameraProvider ->
