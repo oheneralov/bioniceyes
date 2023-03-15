@@ -1,0 +1,36 @@
+install Node 14 or newer.
+
+Install Android Studio https://developer.android.com/studio/index.html  https://developer.android.com/about/versions/14/setup-sdk
+
+download and install OpenJDK from AdoptOpenJDK version 11 of the Java SE Development Kit (JDK). hhttps://developer.android.com/about/versions/14/setup-sdk
+Install the Android SDK . Tools > SDK Manager -> Android 13 (Tiramisu) SDK
+
+3. Configure the ANDROID_HOME environment variable
+Add the following lines to your $HOME/.bash_profile or $HOME/.bashrc (if you are using zsh then ~/.zprofile or ~/.zshrc) config file:
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+watchman
+git clone https://github.com/facebook/watchman.git
+$ cd watchman
+
+# Ensure Cargo is installed. Either through your OS's package manager or https://rustup.rs/
+$ cargo version
+
+# Optionally, to save time, you can ask Watchman's build process to install system dependencies
+$ sudo ./install-system-packages.sh
+
+$ ./autogen.sh
+
+Follow instructions:
+https://reactnavigation.org/docs/getting-started
+
+start Metro
+npx react-native start
+
+: Start your application
+npx react-native run-android
+
+
+
