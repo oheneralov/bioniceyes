@@ -22,13 +22,13 @@ com.awesomeproject.app-jetified-tracing-1.1.0-20 /home/newuser/.gradle/caches/tr
 com.awesomeproject.app-jetified-appcompat-resources-1.4.1-21 /home/newuser/.gradle/caches/transforms-3/ef91f3f315b03605fb7fbcae00107bdd/transformed/jetified-appcompat-resources-1.4.1/res
 com.awesomeproject.app-jetified-startup-runtime-1.0.0-22 /home/newuser/.gradle/caches/transforms-3/f8fa9cb92b43c5927ff2ee8e7e85b2ef/transformed/jetified-startup-runtime-1.0.0/res
 com.awesomeproject.app-jetified-flipper-0.125.0-23 /home/newuser/.gradle/caches/transforms-3/fafd183758d3345458ca134509e8f09e/transformed/jetified-flipper-0.125.0/res
-com.awesomeproject.app-pngs-24 /home/newuser/alex/training/react native/navigation/android/app/build/generated/res/pngs/debug
-com.awesomeproject.app-resValues-25 /home/newuser/alex/training/react native/navigation/android/app/build/generated/res/resValues/debug
-com.awesomeproject.app-rs-26 /home/newuser/alex/training/react native/navigation/android/app/build/generated/res/rs/debug
-com.awesomeproject.app-mergeDebugResources-27 /home/newuser/alex/training/react native/navigation/android/app/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
-com.awesomeproject.app-mergeDebugResources-28 /home/newuser/alex/training/react native/navigation/android/app/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
-com.awesomeproject.app-merged_res-29 /home/newuser/alex/training/react native/navigation/android/app/build/intermediates/merged_res/debug
-com.awesomeproject.app-debug-30 /home/newuser/alex/training/react native/navigation/android/app/src/debug/res
-com.awesomeproject.app-main-31 /home/newuser/alex/training/react native/navigation/android/app/src/main/res
-com.awesomeproject.app-packaged_res-32 /home/newuser/alex/training/react native/navigation/node_modules/react-native-safe-area-context/android/build/intermediates/packaged_res/debug
-com.awesomeproject.app-packaged_res-33 /home/newuser/alex/training/react native/navigation/node_modules/react-native-screens/android/build/intermediates/packaged_res/debug
+com.awesomeproject.app-pngs-24 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/android/app/build/generated/res/pngs/debug
+com.awesomeproject.app-resValues-25 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/android/app/build/generated/res/resValues/debug
+com.awesomeproject.app-rs-26 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/android/app/build/generated/res/rs/debug
+com.awesomeproject.app-mergeDebugResources-27 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/android/app/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
+com.awesomeproject.app-mergeDebugResources-28 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/android/app/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+com.awesomeproject.app-merged_res-29 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/android/app/build/intermediates/merged_res/debug
+com.awesomeproject.app-debug-30 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/android/app/src/debug/res
+com.awesomeproject.app-main-31 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/android/app/src/main/res
+com.awesomeproject.app-packaged_res-32 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/node_modules/react-native-safe-area-context/android/build/intermediates/packaged_res/debug
+com.awesomeproject.app-packaged_res-33 /home/newuser/alex/bioniceyes/bioniceyes/iosandandroid/node_modules/react-native-screens/android/build/intermediates/packaged_res/debug
