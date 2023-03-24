@@ -4,137 +4,13 @@
  *
  * @format
  */
-/*
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-} from 'react-native/Libraries/NewAppScreen';
-
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function HomeScreen() {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step 1">
-            Home <Text style={styles.highlight}>page</Text>
-          </Section>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  )
-}
-
-function DetailsScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-}
-
-
-const Stack = createNativeStackNavigator();
-
-function App(): JSX.Element {
-
-  return (
-    <NavigationContainer>
-        <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
-
-    </NavigationContainer>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
-
-*/
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TextInput, StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SetStateAction } from 'react';
 
 function HomeScreen() {
   return (
@@ -145,9 +21,38 @@ function HomeScreen() {
 }
 
 function SettingsScreen() {
+  const [volume, setVolume] = React.useState('10');
+
+  React.useEffect( () => {
+  AsyncStorage.getItem('volume').then(savedVolume => setVolume(savedVolume as unknown as string))
+  }, []);
+
+
+
+  const changeVolume = async (volume: SetStateAction<string>) => {
+    setVolume(volume);
+
+    try {
+      await AsyncStorage.setItem(
+        'volume',
+        volume as unknown as string
+      );
+    } catch (error: any) {
+      console.log('Error saving data ', (error as unknown as Error).message)
+    }
+
+  }
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Volume</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={ changeVolume}
+        value={volume}
+        placeholder="set volume"
+        keyboardType="numeric"
+      />
     </View>
   );
 }
@@ -164,3 +69,23 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 0,
+    flexDirection: 'row'
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
+  text: {
+    height: 40,
+    margin: 12,
+    padding: 10,
+    fontWeight: 'bold'
+  },
+});
