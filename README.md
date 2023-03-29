@@ -19,6 +19,7 @@ is an experimental visual device intended to restore functional vision in those 
 /website contains a general information about the project. It is in progress.
 
 ### Contacts
+Oleksandr Generalov
 oheneralov@gmail.com
 
 ### Support the project
