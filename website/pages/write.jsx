@@ -5,7 +5,7 @@ export default function Write(initialData) {
   return (
     <SimpleLayout preContainer={<ArticlesJumbo menu="About" />}>
       <div className="row">
-        <h1>Hey People</h1>
+        <h1>A few words about us</h1>
       </div>
       <div className="row">
         <p>

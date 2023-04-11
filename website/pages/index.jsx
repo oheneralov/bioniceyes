@@ -6,6 +6,9 @@ export default function Home(initialData) {
   console.log('initialData ', initialData)
   return (
     <SimpleLayout preContainer={<ArticlesJumbo menu="Home" />}>
+        <div className="row">
+        <h1>Overview</h1>
+      </div>
       <div className="row">
         <p>
           {initialData.data.content.Home}
