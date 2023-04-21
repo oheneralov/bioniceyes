@@ -1,7 +1,0 @@
-{
-    "content": {
-        "Home": "2 billion people have a vision impairment or blindness The majority of people with vision impairment are over the age of 50 years. \nBlindness is a very serious problem. It is the inability to see anything even light. A visual prosthesis, referred to as a bionic eye,\nis an experimental visual device intended to restore functional vision in those with partial or total blindness. \n This goal of this project is:\n1. to create bionic eyes. Bionic eyes will be an electronic appliance which can function on the basis of the artificial intelligence.\nSince blind people cannot see, the artificial intelligence can see instead of them and pass signals to a brain via person's sensors about the surrounding objects.\nIn future we plan to use the following workflow: An images is converted to signals and are transmitted to skin and ear receptors to pass signals to a brain.\n2. create a device (artificial finger with AI) which reads text and voice it. It will be a helper for a blind person.\n3. create a smartphone application which will provide audio hints about a current location of a blind person. For example,'shop', 'school' etc. 4. Create ultrasonic glasses which play sound when there is something in the front of a person",
-        "Sensory": "Sensory content",
-        "About": "This project is done by a small group of researches experienced in convolutional neural networks and software development"
-    }
-}
